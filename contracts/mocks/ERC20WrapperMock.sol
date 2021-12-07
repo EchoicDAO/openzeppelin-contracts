@@ -8,8 +8,9 @@ contract ERC20WrapperMock is ERC20Wrapper {
     constructor(
         IERC20 _underlyingToken,
         string memory name,
-        string memory symbol
-    ) ERC20(name, symbol) ERC20Wrapper(_underlyingToken) {}
+        string memory symbol,
+        uint8 decimals
+    ) ERC20(name, symbol, decimals) ERC20Wrapper(_underlyingToken) {}
 
     function recover(address account) public returns (uint256) {
         return _recover(account);

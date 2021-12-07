@@ -9,9 +9,10 @@ contract ERC20PausableMock is ERC20Pausable {
     constructor(
         string memory name,
         string memory symbol,
+        uint8 decimals,
         address initialAccount,
         uint256 initialBalance
-    ) ERC20(name, symbol) {
+    ) ERC20(name, symbol, decimals) {
         _mint(initialAccount, initialBalance);
     }
 

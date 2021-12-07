@@ -8,9 +8,10 @@ contract ERC20PermitMock is ERC20Permit {
     constructor(
         string memory name,
         string memory symbol,
+        uint8 decimals,
         address initialAccount,
         uint256 initialBalance
-    ) payable ERC20(name, symbol) ERC20Permit(name) {
+    ) payable ERC20(name, symbol, decimals) ERC20Permit(name) {
         _mint(initialAccount, initialBalance);
     }
 
