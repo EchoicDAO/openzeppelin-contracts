@@ -224,4 +224,21 @@ library SafeMath {
             return a % b;
         }
     }
+
+    /**
+     * @dev Returns the square roof of the value provided
+     */
+    function SqRt(uint256 a) internal pure returns (uint256 c) {
+        if (a > 3) {
+            c = a;
+            uint256 b = add(div(a, 2), 1);
+            while (b < c) {
+                c = b;
+                b = div(add(div(a, b), b), 2);
+            }
+        } else if (a != 0) {
+            c = 1;
+        }
+        return c;
+    }
 }
