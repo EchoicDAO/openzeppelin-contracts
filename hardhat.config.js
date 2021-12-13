@@ -33,7 +33,7 @@ const argv = require('yargs/yargs')()
     compiler: {
       alias: 'compileVersion',
       type: 'string',
-      default: '0.8.9',
+      default: '0.8.10',
     },
     coinmarketcap: {
       alias: 'coinmarketcapApiKey',
@@ -52,7 +52,7 @@ for (const f of fs.readdirSync(path.join(__dirname, 'hardhat'))) {
   require(path.join(__dirname, 'hardhat', f));
 }
 
-const withOptimizations = argv.enableGasReport || argv.compileMode === 'production';
+const withOptimizations = true;
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -63,7 +63,7 @@ module.exports = {
     settings: {
       optimizer: {
         enabled: withOptimizations,
-        runs: 200,
+        runs: 999999,
       },
     },
   },
