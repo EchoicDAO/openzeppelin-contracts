@@ -119,6 +119,43 @@ contract PaymentSplitter is Context {
     function payee(uint256 index) public view returns (address) {
         return _payees[index];
     }
+    
+    /**
+     * @dev Returns the number of payees in the contract
+     */
+    function payeeCount() internal view returns (uint256) {
+        return _payees.length;
+    }
+    
+    /**
+     * @dev Getter for the pending payment amount of the payer number `index`
+     */
+    function pendingPayment(uint256 index) internal view returns (uint256) {
+        address account = payee(index);
+        
+        if (_shares[account] == 0) {
+            return 0;
+        }
+        
+        uint256 totalReceived = address(this).balance + totalReleased();
+        
+        return _pendingPayment(account, totalReceived, released(account));
+    }
+
+    /**
+     * @dev Getter for the pending payment amount of the payer number `index` for token
+     */
+    function pendingPayment(IERC20 token, uint256 index) internal view returns (uint256) {
+        address account = payee(index);
+
+        if (_shares[account] == 0) {
+            return 0;
+        }
+
+        uint256 totalReceived = token.balanceOf(address(this)) + totalReleased(token);
+
+        return _pendingPayment(account, totalReceived, released(token, account));
+    }
 
     /**
      * @dev Triggers a transfer to `account` of the amount of Ether they are owed, according to their percentage of the
